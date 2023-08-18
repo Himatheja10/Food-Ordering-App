@@ -2,8 +2,9 @@
   "name": "namaste-react-akshay",
   "version": "1.0.0",
   "description": "\"Learning react from akshay\"",
-  
   "scripts": {
+    "start": "parcel index.html",
+    "build": "parcel build index.html",
     "test": "jest"
   },
   "repository": {
