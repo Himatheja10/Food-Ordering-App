@@ -6,28 +6,28 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 const Header = () =>{
   let [loginbtn,setloginbtn] = useState("Login")
   const onlinestatus = useOnlineStatus();
-    return <div className="header">
+    return <div className="flex justify-between bg-pink-50 shadow-lg m-2">
         <div>
-          <img src={LOGO_URL} className="image-icon"/>
+          <img src={LOGO_URL} className="w-56"/>
         </div>
-        <div className="Nav-items">
-          <ul>
-            <li>onlinestatus : {onlinestatus ? "🟢":"🔴"}
+        <div className="flex items-center p-4 m-4">
+          <ul className="flex ">
+            <li className="px-4">onlinestatus : {onlinestatus === true ? "🟢":"🔴"}
 
 
             </li>
-           <li>
+           <li className="px-4">
             <Link to="/">Home</Link>
             </li>
-           <li>
+           <li className="px-4">
            <Link to="/about">About Us</Link>
            </li>
-           <li>
+           <li className="px-4">
              <Link to="/contact">Contact</Link>
             </li>
-           <li>Cart</li>
-           <li><Link to="/grocery">Grocery</Link></li>
-           <li><button className="login-btn" onClick={ () => {
+           <li className="px-4">Cart</li>
+           <li className="px-4"><Link to="/grocery">Grocery</Link></li>
+           <li className="px-4"><button className="login-btn" onClick={ () => {
               loginbtn === "Login" ?setloginbtn("Logout"):setloginbtn("Login");
            }}>{loginbtn}</button></li>
           </ul>

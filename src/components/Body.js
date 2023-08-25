@@ -1,10 +1,11 @@
-import Restrocard  from "./Restrocard.js";
+
 
 import Shimmer from "./Shimmer.js";
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
+import Restrocard,{withpromotedlabel} from "./Restrocard.js";
 
 
  const Body = () =>{
@@ -15,6 +16,9 @@ import useOnlineStatus from "../utils/useOnlineStatus";
   const [searchtext,setsearchtext] = useState("")
 
   const onlinestatus = useOnlineStatus();
+
+  const PromotedRestaurant = withpromotedlabel(Restrocard);
+  
   
     useEffect(  () => {
       fetchdata();
@@ -31,15 +35,16 @@ import useOnlineStatus from "../utils/useOnlineStatus";
      
      if(onlinestatus === false ) return <h1>You are offline man check ur internet</h1>
   
+    
 
     return listOfRestaurants.length === 0?<Shimmer />:(<div className="body-container">
-      <div className="bodytop-container">
-         <div className="search-container">
-          <input type="search" value={searchtext} onChange={(e) =>{
+      <div className="bodytop-container flex items-center">
+         <div className="search-container m-4 p-4">
+          <input type="search" className="border border-solid border-black" value={searchtext} onChange={(e) =>{
           
             setsearchtext(e.target.value);
           }}/>
-          <button className="search-btn" onClick={() => {
+          <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={() => {
             
             //filter restauramts using search logic
             let filterlist = listOfRestaurants.filter(
@@ -49,7 +54,8 @@ import useOnlineStatus from "../utils/useOnlineStatus";
              setfilterOfRestaurants(filterlist);
           }}>Search</button>
          </div>
-         <button className="filter-btn" onClick={ () =>{
+         <div>
+         <button className="px-4 py-2 bg-green-100 m-4 " onClick={ () =>{
           let filteredlist = listOfRestaurants.filter(
             (restau) =>   restau.info.avgRating>4
           );
@@ -58,9 +64,12 @@ import useOnlineStatus from "../utils/useOnlineStatus";
         }
        
          }>Top rated restaurant</button>
+         </div>
       </div>
-      <div className="restro-container">
-       {filterOfRestaurants.map( (restaurant) => <Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}><Restrocard resData = {restaurant} /></Link>)}
+      <div className="restro-container flex flex-wrap">
+       {filterOfRestaurants.map( (restaurant) => 
+           <Link key={restaurant.info.id} to={"/restaurants/"+restaurant.info.id}>
+              {true ? <PromotedRestaurant resData = {restaurant}/> : <Restrocard resData = {restaurant}/>}</Link>)}
        
       </div>
     </div>)
