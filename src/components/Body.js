@@ -1,11 +1,12 @@
 
 
 import Shimmer from "./Shimmer.js";
-import { useEffect, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
 
 import Restrocard,{withpromotedlabel} from "./Restrocard.js";
+import UserContext from "../utils/UserContext.js";
 
 
  const Body = () =>{
@@ -16,6 +17,7 @@ import Restrocard,{withpromotedlabel} from "./Restrocard.js";
   const [searchtext,setsearchtext] = useState("")
 
   const onlinestatus = useOnlineStatus();
+  const {loggedInUser, setuserName} = useContext(UserContext);
 
   const PromotedRestaurant = withpromotedlabel(Restrocard);
   
@@ -28,7 +30,7 @@ import Restrocard,{withpromotedlabel} from "./Restrocard.js";
       const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.97663373159588&lng=79.53625570982695&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
       let jsondata = await data.json();
       console.log(jsondata)
-      console.log(jsondata.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
+      //console.log(jsondata.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
       setlistOfRestaurants(jsondata?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       setfilterOfRestaurants(jsondata?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
      }
@@ -53,6 +55,7 @@ import Restrocard,{withpromotedlabel} from "./Restrocard.js";
               )
              setfilterOfRestaurants(filterlist);
           }}>Search</button>
+          
          </div>
          <div>
          <button className="px-4 py-2 bg-green-100 m-4 " onClick={ () =>{
@@ -64,6 +67,12 @@ import Restrocard,{withpromotedlabel} from "./Restrocard.js";
         }
        
          }>Top rated restaurant</button>
+         </div>
+         <div>
+          <label className="p-1">User Name :</label>
+           <input  className="border border-solid border-black p-2" value={loggedInUser} onChange={(e) => {
+                setuserName(e.target.value)
+           }}/>
          </div>
       </div>
       <div className="restro-container flex flex-wrap">
