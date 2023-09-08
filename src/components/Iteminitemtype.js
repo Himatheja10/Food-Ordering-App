@@ -1,6 +1,15 @@
 import { Item_URL } from "../utils/constants"
+import { useDispatch } from "react-redux"
+import { addItem } from "../utils/cartSlice";
 
 const Iteminitemtype = ({itemcard}) => {
+
+    const dispatch = useDispatch();
+
+    const handleaddItem = (itemcard) => {
+        //dispatch an action
+        dispatch(addItem(itemcard));
+    }
     
     return (
         <div className="py-4 flex border-2 border-b-black">
@@ -13,7 +22,7 @@ const Iteminitemtype = ({itemcard}) => {
                 <div >
                 
                 <div className="absolute">
-                <button className="bg-black text-white rounded-md mx-10 p-2">Add +</button>
+                <button className="bg-black text-white rounded-md mx-10 p-2" onClick={ () => handleaddItem(itemcard)}>Add +</button>
                 </div>
                 <img src={Item_URL+itemcard.card.info.imageId} className="w-full h-40 rounded-lg"/>
                 </div>

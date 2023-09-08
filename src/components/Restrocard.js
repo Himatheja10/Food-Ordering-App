@@ -7,6 +7,7 @@ import UserContext from "../utils/UserContext";
 
  const Restrocard = (props) =>{
     const {resData} = props;
+    console.log(resData);
     const {info} = resData;
     const {loggedInUser} = useContext(UserContext)
     const{name,cloudinaryImageId,avgRating,cuisines} = info;

@@ -10,7 +10,7 @@ const Itemtype = ({menutype,wrapitems,setshowIndex}) => {
 
     //const [wrapitems,setwrapitems] = useState(false);
     
-    console.log(title)
+    //console.log(title)
     return (
           
         <div className=" py-4 shadow-xl bg-gray-100 border-4 border-b-black">

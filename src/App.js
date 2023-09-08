@@ -7,9 +7,12 @@ import About from "./components/About";
 import Error from "./components/Error";
 import Contact from "./components/Contact";
 import Resmenu from "./components/Resmenu";
-//import Grocery from "./components/Grocery";
-
+//import Grocery from "./components/Grocery"; - we have imported this using lazy in line 26
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./components/Cart";
+
 
 
 
@@ -23,13 +26,16 @@ const Grocery = lazy(() => import("./components/Grocery"))
         }
         setuserName(data.name);
     },[])
+    
    return (
-   <UserContext.Provider value={{loggedInUser : userName , setuserName}}>
-         <div>
-           <Header />
-            <Outlet/>
-        </div>
-   </UserContext.Provider>
+      <Provider store={appStore}>
+           <UserContext.Provider value={{loggedInUser : userName , setuserName}}>
+               <div>
+                  <Header />
+                  <Outlet/>
+               </div>
+           </UserContext.Provider>
+      </Provider>
    )
  }
 
@@ -59,7 +65,11 @@ const Grocery = lazy(() => import("./components/Grocery"))
             {
                 path : "/restaurants/:resid",
                 element : <Resmenu />
-            }
+            },
+            {
+                path : "/cart",
+                element : <Cart />
+            },
         ],
         errorElement : <Error />
     },

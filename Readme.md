@@ -23,3 +23,11 @@ restaurant card
  /adress
  /contact
  */
+
+ # Episode 11
+ -Install @reduxjs/toolkit , react-redux these two libraries
+ -Build our store
+ -Connect our store to the app
+ -Create a cart slice
+ -Dispatch an action
+ -Selector   
