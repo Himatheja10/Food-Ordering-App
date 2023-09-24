@@ -29,7 +29,7 @@ import UserContext from "../utils/UserContext.js";
      const fetchdata = async () => {
       const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.97663373159588&lng=79.53625570982695&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
       let jsondata = await data.json();
-      //console.log(jsondata)
+      console.log(jsondata);
       //console.log(jsondata.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);
       setlistOfRestaurants(jsondata?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
       setfilterOfRestaurants(jsondata?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
@@ -42,7 +42,7 @@ import UserContext from "../utils/UserContext.js";
     return listOfRestaurants.length === 0 ? <Shimmer /> : (<div className="body-container">
       <div className="bodytop-container flex items-center">
          <div className="search-container m-4 p-4">
-          <input type="search" className="border border-solid border-black" value={searchtext} onChange={(e) =>{
+          <input type="search" data-testid= "searchinput" className="border border-solid border-black" value={searchtext} onChange={(e) =>{
           
             setsearchtext(e.target.value);
           }}/>
