@@ -30,4 +30,4 @@ restaurant card
  -Connect our store to the app
  -Create a cart slice
  -Dispatch an action
- -Selector   
+ -Selector    

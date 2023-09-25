@@ -27,7 +27,9 @@ import UserContext from "../utils/UserContext.js";
 
     },[])
      const fetchdata = async () => {
-      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.97663373159588&lng=79.53625570982695&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING")
+      const data = await fetch("https://www.swiggy.com/dapi/restaurants/list/v5?lat=17.97663373159588&lng=79.53625570982695&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING",{
+        method : 'GET',
+      })
       let jsondata = await data.json();
       console.log(jsondata);
       //console.log(jsondata.data.cards[2].card.card.gridElements.infoWithStyle.restaurants);

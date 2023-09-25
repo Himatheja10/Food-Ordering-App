@@ -5,11 +5,13 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 import { useContext } from "react";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Header = () =>{
   let [loginbtn,setloginbtn] = useState("Login")
   const onlinestatus = useOnlineStatus();
-  const {loggedInUser} = useContext(UserContext)
+  const {setisloggedin,loggedInUser} = useContext(UserContext);
+  const history = useNavigate();
 
   //Subscribing to the store using useSelector
   const cartItems = useSelector((store) => store.cart.items)
@@ -27,7 +29,7 @@ const Header = () =>{
 
             </li>
            <li className="px-4">
-            <Link to="/">Home</Link>
+            <Link to="/home">Home</Link>
             </li>
            <li className="px-4">
            <Link to="/about">About Us</Link>
@@ -38,8 +40,10 @@ const Header = () =>{
             <li className="px-4 font-bold"><Link to="/cart">Cart - ({cartItems.length})</Link></li>
            <li className="px-4"><Link to="/grocery">Grocery</Link></li>
            <li className="px-4"><button className="login-btn" onClick={ () => {
-              loginbtn === "Login" ?setloginbtn("Logout"):setloginbtn("Login");
-           }}>{loginbtn}</button></li>
+              setisloggedin(false);
+              localStorage.removeItem("login");
+              history("/");
+           }}>Logout</button></li>
            <li  className="font-bold">{loggedInUser}</li>
           </ul>
         </div>
