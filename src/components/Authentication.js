@@ -11,7 +11,6 @@ const Authentication = () => {
     const passwordinput = useRef();
 
     const Submithandler = async (e) => {
-        try{
         e.preventDefault();
         const url = "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyCn_RHzhbH0pxH9Bnqeq6IHI9605LjJ3Fs";
 
@@ -33,17 +32,13 @@ const Authentication = () => {
         history("/home");
        }
        else{
-        console.log(data);
-          throw new Error(data.error.message);
+        console.log(data.error.message);
+        alert(data.error.message);
+          
        }
-    }catch (err) {
-        console.log(err);
-        alert(err);
-    }
 
     }
     const signupfnc = async (e) => {
-        try{
         e.preventDefault();
         const url = "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCn_RHzhbH0pxH9Bnqeq6IHI9605LjJ3Fs";
         let response =  await fetch(url,{method : "POST",
@@ -64,12 +59,9 @@ const Authentication = () => {
     }
     else{
         const data = await response.json();
-        throw new Error(data.error.message);
+        alert(data.error.message);
     }
-}catch (err) {
-    console.log(err);
-    alert(err);
-}
+
     }
 
     
